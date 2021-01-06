@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  phoenix: &app_base
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ["mix", "phx.server"]
+    environment:
+      - "DATABASE_HOST=db"
+    volumes:
+      - ".:/app:cached"
+      - "node_modules:/app/assets/node_modules"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+  db:
+    image: postgres:12
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgrse
+      POSTGRES_HOST_AUTH_METHOD: trust
+      TZ: /usr/share/zoneinfo/Asia/Tokyo
+
+volumes:
+  postgres:
+  node_modules:
