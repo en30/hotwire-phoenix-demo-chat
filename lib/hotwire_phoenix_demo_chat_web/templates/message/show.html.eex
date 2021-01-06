@@ -1,0 +1,13 @@
+<h1>Show Message</h1>
+
+<ul>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @message.content %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.room_message_path(@conn, :edit, @message.room_id, @message) %></span>
+<span><%= link "Back", to: Routes.room_path(@conn, :show, @message.room_id) %></span>

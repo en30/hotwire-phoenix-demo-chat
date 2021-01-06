@@ -1,0 +1,26 @@
+<h1>Listing Messages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for message <- @messages do %>
+    <tr>
+      <td><%= message.content %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.message_path(@conn, :show, message) %></span>
+        <span><%= link "Edit", to: Routes.message_path(@conn, :edit, message) %></span>
+        <span><%= link "Delete", to: Routes.message_path(@conn, :delete, message), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Message", to: Routes.message_path(@conn, :new) %></span>

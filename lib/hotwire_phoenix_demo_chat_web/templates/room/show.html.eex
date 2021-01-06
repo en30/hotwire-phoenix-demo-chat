@@ -1,0 +1,19 @@
+<h1>Show Room</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @room.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.room_path(@conn, :edit, @room) %></span>
+<span><%= link "Back", to: Routes.room_path(@conn, :index) %></span>
+
+<div id="messages">
+  <%= render_many @room.messages, HotwirePhoenixDemoChatWeb.MessageView, "_message.html" %>
+</div>
+
+<span><%= link "New Message", to: Routes.room_message_path(@conn, :new, @room) %></span>

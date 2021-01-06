@@ -1,0 +1,5 @@
+<h1>New Message</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.room_message_path(@conn, :create, @changeset.changes.room_id)) %>
+
+<span><%= link "Back", to: Routes.room_message_path(@conn, :index, @changeset.changes.room_id) %></span>

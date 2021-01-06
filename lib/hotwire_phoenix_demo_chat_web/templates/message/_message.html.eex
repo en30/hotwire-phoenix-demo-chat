@@ -1,0 +1,3 @@
+<p>
+  <%= HotwirePhoenixDemoChatWeb.MessageView.short_datetime(@message.inserted_at) %>: <%= @message.content %>
+</p>
