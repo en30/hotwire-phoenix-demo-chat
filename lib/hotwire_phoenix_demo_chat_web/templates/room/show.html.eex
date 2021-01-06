@@ -1,5 +1,6 @@
 <h1>Show Room</h1>
 
+<%= TurboView.turbo_frame_tag "room" do %>
 <ul>
 
   <li>
@@ -8,12 +9,13 @@
   </li>
 
 </ul>
-
 <span><%= link "Edit", to: Routes.room_path(@conn, :edit, @room) %></span>
-<span><%= link "Back", to: Routes.room_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.room_path(@conn, :index), data: [turbo_frame: "_top"] %></span>
+<% end %>
+
 
 <div id="messages">
   <%= render_many @room.messages, HotwirePhoenixDemoChatWeb.MessageView, "_message.html" %>
 </div>
 
-<span><%= link "New Message", to: Routes.room_message_path(@conn, :new, @room) %></span>
+<%= TurboView.turbo_frame_tag "new_message", src: Routes.room_message_path(@conn, :new, @room), target: "_top" %>

@@ -69,6 +69,7 @@ defmodule HotwirePhoenixDemoChatWeb do
       import HotwirePhoenixDemoChatWeb.ErrorHelpers
       import HotwirePhoenixDemoChatWeb.Gettext
       alias HotwirePhoenixDemoChatWeb.Router.Helpers, as: Routes
+      alias HotwirePhoenixDemoChatWeb.TurboView
     end
   end
 

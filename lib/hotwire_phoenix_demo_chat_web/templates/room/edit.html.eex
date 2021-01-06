@@ -1,5 +1,7 @@
 <h1>Edit Room</h1>
 
+<%= TurboView.turbo_frame_tag "room" do %>
 <%= render "form.html", Map.put(assigns, :action, Routes.room_path(@conn, :update, @room)) %>
+<% end %>
 
 <span><%= link "Back", to: Routes.room_path(@conn, :index) %></span>
