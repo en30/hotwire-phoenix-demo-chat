@@ -14,4 +14,9 @@ import "../css/app.scss"
 //
 import "phoenix_html"
 import Trubo from "@hotwired/turbo"
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
 
+const application = Application.start()
+const context = require.context("./controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))
