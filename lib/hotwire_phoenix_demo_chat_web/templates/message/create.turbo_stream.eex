@@ -1,0 +1,3 @@
+<%= TurboView.turbo_stream_tag(:append, "messages") do %>
+  <%= render_one @message, HotwirePhoenixDemoChatWeb.MessageView, "_message.html" %>
+<% end %>

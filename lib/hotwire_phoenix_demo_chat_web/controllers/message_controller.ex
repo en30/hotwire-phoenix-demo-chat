@@ -16,13 +16,25 @@ defmodule HotwirePhoenixDemoChatWeb.MessageController do
 
   def create(conn, %{"room_id" => room_id, "message" => message_params}) do
     case Chat.create_message(Map.merge(message_params, %{"room_id" => room_id})) do
-      {:ok, _message} ->
+      {:ok, message} ->
         conn
-        |> put_flash(:info, "Message created successfully.")
-        |> redirect(to: Routes.room_path(conn, :show, room_id))
+        |> notify_successful_creation(message)
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
+    end
+  end
+
+  defp notify_successful_creation(conn, message) do
+    case get_format(conn) do
+      "turbo_stream" ->
+        conn
+        |> render("create.turbo_stream", message: message)
+
+      _ ->
+        conn
+        |> put_flash(:info, "Message created successfully.")
+        |> redirect(to: Routes.room_path(conn, :show, message.room_id))
     end
   end
 

@@ -16,4 +16,20 @@ defmodule HotwirePhoenixDemoChatWeb.TurboView do
   def turbo_frame_tag(id, content, attrs) when is_list(attrs) do
     content_tag("turbo-frame", content, [{:id, id} | attrs])
   end
+
+  def turbo_stream_tag(:remove, target) do
+    content_tag("turbo-stream", "", action: :remove, target: target)
+  end
+
+  @template_actions [:replace, :update, :append, :prepend]
+
+  def turbo_stream_tag(action, target, do: block) when action in @template_actions do
+    turbo_stream_tag(action, target, block)
+  end
+
+  def turbo_stream_tag(action, target, template) when action in @template_actions do
+    content_tag("turbo-stream", action: action, target: target) do
+      content_tag("template", template)
+    end
+  end
 end
