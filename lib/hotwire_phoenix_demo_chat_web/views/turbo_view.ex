@@ -1,6 +1,8 @@
 defmodule HotwirePhoenixDemoChatWeb.TurboView do
   use HotwirePhoenixDemoChatWeb, :view
 
+  alias HotwirePhoenixDemoChatWeb.ChannelName
+
   def turbo_frame_tag(id, do: block) do
     content_tag("turbo-frame", block, id: id)
   end
@@ -31,5 +33,13 @@ defmodule HotwirePhoenixDemoChatWeb.TurboView do
     content_tag("turbo-stream", action: action, target: target) do
       content_tag("template", template)
     end
+  end
+
+  def turbo_stream_source(channel: channel) do
+    content_tag("turbo-stream-source", "", channel: channel, signed_channel_name: signed_channel_name(channel))
+  end
+
+  defp signed_channel_name(channel) do
+    ChannelName.sign(HotwirePhoenixDemoChatWeb.Endpoint, channel)
   end
 end

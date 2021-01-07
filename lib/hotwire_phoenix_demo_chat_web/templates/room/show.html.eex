@@ -1,5 +1,7 @@
 <h1>Show Room</h1>
 
+<%= TurboView.turbo_stream_source channel: "room:#{@room.id}" %>
+
 <%= TurboView.turbo_frame_tag "room" do %>
 <ul>
 

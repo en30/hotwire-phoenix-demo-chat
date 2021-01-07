@@ -79,4 +79,6 @@ defmodule HotwirePhoenixDemoChatWeb do
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
   end
+
+  defdelegate notify_new_message(message), to: HotwirePhoenixDemoChatWeb.RoomChannel
 end

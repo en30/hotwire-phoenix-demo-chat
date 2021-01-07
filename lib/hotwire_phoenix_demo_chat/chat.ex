@@ -151,7 +151,15 @@ defmodule HotwirePhoenixDemoChat.Chat do
     %Message{}
     |> Message.changeset(attrs)
     |> Repo.insert()
+    |> notify_new_message()
   end
+
+  defp notify_new_message(res = {:ok, message}) do
+    HotwirePhoenixDemoChatWeb.notify_new_message(message)
+    res
+  end
+
+  defp notify_new_message(err), do: err
 
   @doc """
   Updates a message.

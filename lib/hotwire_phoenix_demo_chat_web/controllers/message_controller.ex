@@ -29,7 +29,7 @@ defmodule HotwirePhoenixDemoChatWeb.MessageController do
     case get_format(conn) do
       "turbo_stream" ->
         conn
-        |> render("create.turbo_stream", message: message)
+        |> send_resp(:created, "")
 
       _ ->
         conn
