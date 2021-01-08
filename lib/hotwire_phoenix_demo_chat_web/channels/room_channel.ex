@@ -19,11 +19,37 @@ defmodule HotwirePhoenixDemoChatWeb.RoomChannel do
       {:error, "unauthorized"}
   end
 
-  def notify_new_message(message) do
+  def notify_message_creation(message) do
     stream =
       Phoenix.View.render_to_string(
         MessageView,
         "create.turbo_stream",
+        message: message
+      )
+
+    Endpoint.broadcast!("room:#{message.room_id}", "new_message", %{
+      stream: stream
+    })
+  end
+
+  def notify_message_update(message) do
+    stream =
+      Phoenix.View.render_to_string(
+        MessageView,
+        "update.turbo_stream",
+        message: message
+      )
+
+    Endpoint.broadcast!("room:#{message.room_id}", "new_message", %{
+      stream: stream
+    })
+  end
+
+  def notify_message_deletion(message) do
+    stream =
+      Phoenix.View.render_to_string(
+        MessageView,
+        "delete.turbo_stream",
         message: message
       )
 

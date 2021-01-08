@@ -4,7 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: ["mix", "phx.server"]
+    command: ["elixir", "--name", "server@127.0.0.1", "-S", "mix", "phx.server"]
+    # docker-compose exec phoenix iex --name console@127.0.0.1 -S mix
+    # iex(1)> Node.connect :"server@127.0.0.1"
     environment:
       - "DATABASE_HOST=db"
     volumes:

@@ -151,15 +151,15 @@ defmodule HotwirePhoenixDemoChat.Chat do
     %Message{}
     |> Message.changeset(attrs)
     |> Repo.insert()
-    |> notify_new_message()
+    |> notify_message_creation()
   end
 
-  defp notify_new_message(res = {:ok, message}) do
-    HotwirePhoenixDemoChatWeb.notify_new_message(message)
+  defp notify_message_creation(res = {:ok, message}) do
+    HotwirePhoenixDemoChatWeb.notify_message_creation(message)
     res
   end
 
-  defp notify_new_message(err), do: err
+  defp notify_message_creation(err), do: err
 
   @doc """
   Updates a message.
@@ -177,7 +177,15 @@ defmodule HotwirePhoenixDemoChat.Chat do
     message
     |> Message.changeset(attrs)
     |> Repo.update()
+    |> notify_message_update()
   end
+
+  defp notify_message_update(res = {:ok, message}) do
+    HotwirePhoenixDemoChatWeb.notify_message_update(message)
+    res
+  end
+
+  defp notify_message_update(err), do: err
 
   @doc """
   Deletes a message.
@@ -193,7 +201,15 @@ defmodule HotwirePhoenixDemoChat.Chat do
   """
   def delete_message(%Message{} = message) do
     Repo.delete(message)
+    |> notify_message_deletion()
   end
+
+  defp notify_message_deletion(res = {:ok, message}) do
+    HotwirePhoenixDemoChatWeb.notify_message_deletion(message)
+    res
+  end
+
+  defp notify_message_deletion(err), do: err
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking message changes.

@@ -80,5 +80,7 @@ defmodule HotwirePhoenixDemoChatWeb do
     apply(__MODULE__, which, [])
   end
 
-  defdelegate notify_new_message(message), to: HotwirePhoenixDemoChatWeb.RoomChannel
+  defdelegate notify_message_creation(message), to: HotwirePhoenixDemoChatWeb.RoomChannel
+  defdelegate notify_message_update(message), to: HotwirePhoenixDemoChatWeb.RoomChannel
+  defdelegate notify_message_deletion(message), to: HotwirePhoenixDemoChatWeb.RoomChannel
 end
