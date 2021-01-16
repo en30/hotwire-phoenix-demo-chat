@@ -2,12 +2,11 @@ defmodule HotwirePhoenixDemoChatWeb.Router do
   use HotwirePhoenixDemoChatWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "turbo_stream"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug HotwirePhoenixDemoChatWeb.StreamRequest
     plug HotwirePhoenixDemoChatWeb.FrameRequest
   end
 

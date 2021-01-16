@@ -7,7 +7,7 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "@hotwired/turbo": "^7.0.0-beta.2",
+    "@hotwired/turbo": "^7.0.0-beta.3",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "stimulus": "^2.0.0"

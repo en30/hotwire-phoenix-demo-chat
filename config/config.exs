@@ -27,9 +27,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :mime, :types, %{
-  "text/html; turbo-stream" => ["turbo_stream"],
-  # from beta 3
-  # "application/vnd.turbo.stream.html" => ["turbo_stream"]
+  "text/vnd.turbo-stream.html" => ["turbo_stream"]
 }
 
 config :phoenix, :format_encoders, turbo_stream: Phoenix.HTML.Engine
